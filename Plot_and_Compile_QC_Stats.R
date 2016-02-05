@@ -43,8 +43,9 @@ dupDF <- read.table("../data/QC/merged/duplication_stats.txt")
 pctHq <- picAlign[,"PF_HQ_ALIGNED_BASES"]/picAlign[,"PF_ALIGNED_BASES"]
 
 pdf("../analysis/graphs/Plot_QC_Percent_Location.pdf")
-boxplot(cbind(pctHq, picSeq[,c(15,11:14)]), ylab = "Percent of bases"
-        , main = "RNA-seq QC metrics across samples"
+boxplot(cbind(pctHq, picSeq[,c(15,11:14)]), ylab = "Percent of Bases"
+        , main = "Plot_and_Compile_QC_Stats.R
+RNA-seq QC metrics across samples"
         , names = c("High\nQuality", "mRNA\nBases", "Protein\nCoding"
                     , "Untranslated\nRegion", "Intronic\nRegion"
                     , "Intergenic\nRegion"), ylim = c(0, 1))
@@ -64,8 +65,8 @@ ggplot(ggDF, aes(x = variable, y = value, col = variable)) +
   guides(col = FALSE) +
   ylab("Number of Fragments Aligned") +
   xlab("Location") +
-  ggtitle("Number of Fragments Aligned by Location
-       Plot_and_Compile_QC_Stats.R")
+  ggtitle("Plot_and_Compile_QC_Stats.R
+Number of Fragments Aligned by Location")
 ggsave("../analysis/graphs/Plot_QC_Aligned_Location.pdf")
 ################################################################################
 
@@ -82,10 +83,10 @@ txCovqtlDF <- apply(txCovDF, 2, quantile, c(0.025, 0.5, 0.975))
 pdf("../analysis/graphs/Plot_QC_Transcript_Coverage.pdf")
 plot(x = as.numeric(colnames(txCovqtlDF)), y = txCovqtlDF[2,]
      , xlab="Percentile of gene body (5' -> 3')"
-     , ylab="Coverage relative to whole transcript"
+     , ylab="Coverage Relative to Whole Transcript"
      , pch=19, ylim = c(0, 1.7)
-     , main = "Relative transcript coverage - median with 95% CIs across samples
-     Plot_and_Compile_QC_Stats.R")
+     , main = "Plot_and_Compile_QC_Stats.R
+Relative transcript coverage - median with 95% CIs across samples")
 lines(x = as.numeric(colnames(txCovqtlDF)), y = txCovqtlDF[2,], col = "black")
 lines(x = as.numeric(colnames(txCovqtlDF)), y = txCovqtlDF[1,], col = "grey")
 lines(x = as.numeric(colnames(txCovqtlDF)), y = txCovqtlDF[3,], col = "grey")
@@ -137,7 +138,7 @@ ggDF <- data.frame(PERCENT_DUPLICATION = dupDF$PERCENT_DUPLICATION
 
 ggplot(ggDF, aes(x = SAMPLE, y = PERCENT_DUPLICATION)) +
   geom_bar(stat = "identity") +
-  theme_bw(base_size = 18) +
+  theme_bw(base_size = 16) +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
   ylab("Percentage Duplication") +
   xlab("Samples") +
@@ -153,7 +154,7 @@ ggDF <- data.frame(SAMPLE = rownames(dupDF)
 
 ggplot(ggDF, aes(x = SAMPLE, y = PERCENT_OPTICAL_DUPLICATES)) +
   geom_bar(stat = "identity") +
-  theme_bw(base_size = 18) +
+  theme_bw(base_size = 16) +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
   ylab("Percent Optical Duplicates") +
   xlab("Samples") +
