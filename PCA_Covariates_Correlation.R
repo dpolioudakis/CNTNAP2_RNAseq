@@ -27,6 +27,10 @@ exDatDF <- read.csv("../data/HTSC/Exprs_HTSCexon.csv", row.names = 1)
 # Metadata
 metDatDF <- read.xlsx("../metadata/Cntnap2 WT KO RNA-seq analysis.xlsx"
                       , sheetIndex = 1)
+# Filtered, normalized, outliers removed expression values (cqnFexDat) and
+# outliers removed metadata (metOrDatDF)
+load("../data/Expr_E10in80_Nm_OR.rda")
+
 # Picard QC data
 seqQCdatDF <- read.csv("../metadata/PicardToolsQC.csv")
 # Gene Length and GC bias
