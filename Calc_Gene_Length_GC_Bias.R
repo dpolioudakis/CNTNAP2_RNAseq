@@ -3,6 +3,11 @@
 # Calculate gene length and GC content for exon union of each gene in list
 ################################################################################
 
+
+##### INCORRECT OUTPUT - NEEDS DEBUGGING AT INDICATED AREA ######
+# Check that union exon lengths and gc correlate with longest isoform lengths
+# and gc
+
 rm(list=ls())
 sessionInfo()
 
@@ -59,11 +64,15 @@ gtfInfoDF <- cbind(gtfInfoDF[ , c(1:8)], ENSGID, ENSEID)
 # 6 and 8 columns are blank - remove
 gtfInfoDF <- gtfInfoDF[ , -c(6, 8)]
 
+
+################ FIX - remove? ############ -> this is only keeping 1st exon?
 # Keep only one copy of each ENSEID - the gtf file records one copy for each
 # transcript id
 keep <- match(unique(ENSEID), ENSEID)
 gtfInfoDF1 <- gtfInfoDF[keep, ]
 ##gtfInfoDF[,1] <- substr(gtfInfoDF[,1],4,10) ## 672406 exons is exactly what biomaRt contains
+##########################################
+
 
 # Recode things for the Genominator package
 # Using as.factor to coerce chromosome names can really botch things up.. beware!
